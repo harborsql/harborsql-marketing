@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">HarborSQL logo variant 06: Result Current</title>
+  <desc id="desc">Three compact result rows carried through a returning channel.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M26 31H56" stroke-width="9"/>
+    <path d="M26 50H72" stroke-width="9"/>
+    <path d="M26 69H52" stroke-width="9"/>
+    <path d="M65 31C76 36 81 42 81 50S76 64 65 69" stroke-width="7"/>
+  </g>
+</svg>

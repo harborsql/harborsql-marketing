@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">HarborSQL logo variant 04: Protocol Span</title>
+  <desc id="desc">Two client endpoints connected by a clean compatibility span.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25 33V67" stroke-width="12"/>
+    <path d="M75 33V67" stroke-width="12"/>
+    <path d="M25 42C39 42 38 58 50 58S61 42 75 42" stroke-width="8"/>
+    <path d="M25 58H75" stroke-width="5"/>
+  </g>
+</svg>

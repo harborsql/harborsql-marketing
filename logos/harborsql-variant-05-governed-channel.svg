@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">HarborSQL logo variant 05: Governed Channel</title>
+  <desc id="desc">A protected boundary around a narrow query channel.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M50 18L75 28V48C75 64 64.8 76.2 50 83C35.2 76.2 25 64 25 48V28L50 18Z" stroke-width="6"/>
+    <path d="M36 50H64" stroke-width="9"/>
+    <path d="M50 36V64" stroke-width="9"/>
+  </g>
+</svg>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HarborSQL Logo Design Exploration</title>
+    <meta
+      name="description"
+      content="HarborSQL logo variants, primary mark, and brand asset downloads."
+    >
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f7fbf8;
+        --paper-strong: #ffffff;
+        --ink: #12231f;
+        --muted: #5b6c65;
+        --line: #d6e1dc;
+        --teal: #087865;
+        --teal-dark: #075446;
+        --coral: #d95c42;
+        --gold: #b9902f;
+        --plum: #575a93;
+        --graphite: #202926;
+        --shadow: 0 22px 70px rgba(18, 35, 31, 0.11);
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 78% 8%, rgba(217, 92, 66, 0.14), transparent 24rem),
+          radial-gradient(circle at 16% 18%, rgba(8, 120, 101, 0.13), transparent 24rem),
+          var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        line-height: 1.55;
+        text-rendering: optimizeLegibility;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1160px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        min-height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 12px 28px;
+        border-bottom: 1px solid rgba(214, 225, 220, 0.82);
+        background: rgba(247, 251, 248, 0.88);
+        backdrop-filter: blur(18px);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 750;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        display: block;
+      }
+
+      .nav {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .button {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0 16px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--graphite);
+        font-weight: 760;
+      }
+
+      .button.primary {
+        border-color: transparent;
+        background: var(--teal-dark);
+        color: #ffffff;
+      }
+
+      .hero {
+        padding: 88px 0 60px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+        gap: 56px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--teal-dark);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.05;
+      }
+
+      h1 {
+        max-width: 780px;
+        font-size: 4.6rem;
+        font-weight: 820;
+      }
+
+      .lede {
+        max-width: 690px;
+        margin: 22px 0 0;
+        color: #30413b;
+        font-size: 1.18rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .primary-panel,
+      .logo-card,
+      .asset-link {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow);
+      }
+
+      .primary-panel {
+        min-height: 360px;
+        display: grid;
+        place-items: center;
+        padding: 42px;
+      }
+
+      .primary-panel img {
+        width: min(240px, 68vw);
+        height: auto;
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .section-heading {
+        max-width: 780px;
+        margin-bottom: 34px;
+      }
+
+      .section-heading h2 {
+        font-size: 2.5rem;
+        font-weight: 820;
+      }
+
+      .section-heading p:not(.eyebrow) {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .logo-card {
+        min-height: 430px;
+        display: flex;
+        flex-direction: column;
+        padding: 22px;
+        transition:
+          transform 220ms ease,
+          border-color 220ms ease,
+          box-shadow 220ms ease;
+      }
+
+      .logo-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(8, 120, 101, 0.42);
+        box-shadow: 0 28px 80px rgba(18, 35, 31, 0.14);
+      }
+
+      .logo-frame {
+        min-height: 190px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 24px;
+        border-radius: var(--radius);
+        background:
+          linear-gradient(135deg, rgba(8, 120, 101, 0.08), rgba(217, 92, 66, 0.07)),
+          #ffffff;
+        color: var(--graphite);
+      }
+
+      .logo-frame img {
+        width: 120px;
+        height: 120px;
+        display: block;
+      }
+
+      .variant-meta {
+        margin: 0 0 8px;
+        color: var(--teal-dark);
+        font-size: 0.76rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .logo-card h3 {
+        font-size: 1.35rem;
+      }
+
+      .logo-card p:not(.variant-meta) {
+        margin: 14px 0 0;
+        color: var(--muted);
+      }
+
+      .logo-card .button {
+        width: fit-content;
+        margin-top: auto;
+      }
+
+      .asset-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+      }
+
+      .asset-link {
+        min-height: 112px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 18px;
+        box-shadow: none;
+      }
+
+      .asset-link span {
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+
+      .asset-link strong {
+        margin-top: 6px;
+        color: var(--teal-dark);
+        font-size: 1.08rem;
+      }
+
+      .site-footer {
+        padding: 36px 0 46px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 3.6rem;
+        }
+
+        .logo-grid,
+        .asset-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .site-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .container {
+          width: min(100% - 28px, 1160px);
+        }
+
+        .hero {
+          padding: 58px 0 42px;
+        }
+
+        h1 {
+          font-size: 2.72rem;
+        }
+
+        .lede {
+          font-size: 1rem;
+        }
+
+        .primary-panel {
+          min-height: 250px;
+          padding: 28px;
+        }
+
+        .section {
+          padding: 54px 0;
+        }
+
+        .section-heading h2 {
+          font-size: 2rem;
+        }
+
+        .logo-grid,
+        .asset-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="HarborSQL home">
+        <img class="brand-mark" src="logo.svg" alt="" aria-hidden="true">
+        <span>HarborSQL</span>
+      </a>
+      <nav class="nav" aria-label="Logo asset navigation">
+        <a class="button" href="index.html">Site</a>
+        <a class="button" href="logos/harborsql-primary.svg">Primary SVG</a>
+        <a class="button primary" href="logos/harborsql-wordmark.svg">Wordmark</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Logo design exploration</p>
+            <h1>HarborSQL</h1>
+            <p class="lede">
+              A test direction built around a stylized dot H. The mark uses a compact data-dot
+              grid so the letter stays readable in the site header and favicon.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="logo.svg">Open primary mark</a>
+              <a class="button" href="logos/harborsql-primary-mono.svg">Open monochrome mark</a>
+            </div>
+          </div>
+          <div class="primary-panel">
+            <img src="logos/harborsql-primary.svg" alt="HarborSQL primary logo">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Six SVG variants</p>
+            <h2>Distinct directions for a database engine that sits beside governed Delta data.</h2>
+            <p>
+              Each variant uses a 100 by 100 viewBox and a restrained geometric vocabulary so
+              the mark can scale from favicon to presentation artwork.
+            </p>
+          </div>
+
+          <div class="logo-grid">
+            <article class="logo-card">
+              <div class="logo-frame">
+                <img src="logos/harborsql-variant-01-dot-h.svg" alt="Dot H logo variant">
+              </div>
+              <p class="variant-meta">01 / Primary direction</p>
+              <h3>Dot H</h3>
+              <p>
+                A stylized H made from rounded table/data dots. The center bridge is slightly
+                smaller so the mark feels like a dot system instead of a block letter.
+              </p>
+              <a class="button" href="logos/harborsql-variant-01-dot-h.svg">Open SVG</a>
+            </article>
+
+            <article class="logo-card">
+              <div class="logo-frame">
+                <img src="logos/harborsql-variant-02-dock-brackets.svg" alt="Dock Brackets logo variant">
+              </div>
+              <p class="variant-meta">02 / SQL prompt</p>
+              <h3>Dock Brackets</h3>
+              <p>
+                Bracket-like docks frame a compact prompt. It leans more developer-tool than
+                infrastructure brand, but stays simple and recognizable.
+              </p>
+              <a class="button" href="logos/harborsql-variant-02-dock-brackets.svg">Open SVG</a>
+            </article>
+
+            <article class="logo-card">
+              <div class="logo-frame">
+                <img src="logos/harborsql-variant-03-catalog-mooring.svg" alt="Catalog Mooring logo variant">
+              </div>
+              <p class="variant-meta">03 / Unity Catalog</p>
+              <h3>Catalog Mooring</h3>
+              <p>
+                A cove-shaped boundary carries three governed table points. This direction is
+                more catalog-forward while remaining lighter than the previous mark.
+              </p>
+              <a class="button" href="logos/harborsql-variant-03-catalog-mooring.svg">Open SVG</a>
+            </article>
+
+            <article class="logo-card">
+              <div class="logo-frame">
+                <img src="logos/harborsql-variant-04-protocol-span.svg" alt="Protocol Span logo variant">
+              </div>
+              <p class="variant-meta">04 / Compatibility</p>
+              <h3>Protocol Span</h3>
+              <p>
+                Two endpoints connected by a clean span emphasize Databricks SQL client
+                compatibility and the server's role as an execution bridge.
+              </p>
+              <a class="button" href="logos/harborsql-variant-04-protocol-span.svg">Open SVG</a>
+            </article>
+
+            <article class="logo-card">
+              <div class="logo-frame">
+                <img src="logos/harborsql-variant-05-governed-channel.svg" alt="Governed Channel logo variant">
+              </div>
+              <p class="variant-meta">05 / Security model</p>
+              <h3>Governed Channel</h3>
+              <p>
+                A shield boundary around a narrow H-channel makes the Unity Catalog security
+                model explicit without depending on small decorative nodes.
+              </p>
+              <a class="button" href="logos/harborsql-variant-05-governed-channel.svg">Open SVG</a>
+            </article>
+
+            <article class="logo-card">
+              <div class="logo-frame">
+                <img src="logos/harborsql-variant-06-result-current.svg" alt="Result Current logo variant">
+              </div>
+              <p class="variant-meta">06 / Result pages</p>
+              <h3>Result Current</h3>
+              <p>
+                Three compact result rows flow through a returning channel. This one pushes
+                closest to DataFusion/Arrow output while staying abstract enough for brand use.
+              </p>
+              <a class="button" href="logos/harborsql-variant-06-result-current.svg">Open SVG</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Asset set</p>
+            <h2>Production-ready files in the marketing repo.</h2>
+          </div>
+          <div class="asset-grid">
+            <a class="asset-link" href="logo.svg">
+              <span>Root asset</span>
+              <strong>logo.svg</strong>
+            </a>
+            <a class="asset-link" href="favicon.svg">
+              <span>Browser icon</span>
+              <strong>favicon.svg</strong>
+            </a>
+            <a class="asset-link" href="logos/harborsql-primary-mono.svg">
+              <span>Flexible color</span>
+              <strong>Primary mono</strong>
+            </a>
+            <a class="asset-link" href="logos/harborsql-primary-1024.png">
+              <span>Transparent PNG</span>
+              <strong>1024px mark</strong>
+            </a>
+            <a class="asset-link" href="logos/harborsql-wordmark.svg">
+              <span>Full brand lockup</span>
+              <strong>Wordmark</strong>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        HarborSQL logo exploration, 2026.
+      </div>
+    </footer>
+  </body>
+</html>

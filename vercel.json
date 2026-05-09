@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/docs",
+      "destination": "https://docs.harborsql.com",
+      "permanent": true
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "https://docs.harborsql.com/:path*",
+      "permanent": true
+    }
+  ]
+}

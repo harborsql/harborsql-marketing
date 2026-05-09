@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HarborSQL - Databricks-compatible SQL for Unity Catalog Delta</title>
+    <meta
+      name="description"
+      content="HarborSQL is an external SQL server for Unity Catalog Delta tables with Databricks SQL client compatibility, local execution, and security anchored in Unity Catalog."
+    >
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="HarborSQL home">
+        <img class="brand-mark" src="logo.svg" alt="" aria-hidden="true">
+        <span>HarborSQL</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#security">Security</a>
+        <a href="#code">Code</a>
+        <a href="https://docs.harborsql.com">Docs</a>
+        <a href="benchmarks.html">Benchmarks</a>
+      </nav>
+      <a class="header-cta" href="https://github.com/harborsql/harborsql">GitHub</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas id="harbor-flow" class="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="container hero-content">
+          <p class="eyebrow">External SQL engine for Unity Catalog Delta</p>
+          <h1 id="hero-title">HarborSQL</h1>
+          <p class="hero-lede">
+            Run a Databricks-compatible SQL endpoint next to your data, keep authorization in
+            Unity Catalog, and query Delta tables without moving client code to a warehouse.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/harborsql/harborsql">View on GitHub</a>
+            <a class="button secondary" href="https://docs.harborsql.com/getting-started">Read the docs</a>
+          </div>
+          <dl class="hero-metrics">
+            <div>
+              <dt>Protocol</dt>
+              <dd>Databricks SQL clients</dd>
+            </div>
+            <div>
+              <dt>Catalog</dt>
+              <dd>Unity Catalog Delta</dd>
+            </div>
+            <div>
+              <dt>Default port</dt>
+              <dd>127.0.0.1:1992</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="Benchmark summary">
+        <div class="container proof-grid">
+          <a class="proof-item" href="benchmarks.html#point-lookups">
+            <span>Optimized point lookup p95</span>
+            <strong>90.0% lower latency</strong>
+          </a>
+          <a class="proof-item" href="benchmarks.html#cost">
+            <span>European on-demand economics</span>
+            <strong>2.8x to 3.6x cheaper</strong>
+          </a>
+          <a class="proof-item" href="benchmarks.html#full-suite">
+            <span>Full ClickBench suite</span>
+            <strong>Honest baseline included</strong>
+          </a>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="section">
+        <div class="container split">
+          <div class="section-copy">
+            <p class="eyebrow">How it works</p>
+            <h2>Keep the client shape. Move the execution path.</h2>
+            <p>
+              HarborSQL accepts Databricks SQL connector-style requests, resolves Unity
+              Catalog Delta tables as the caller, opens the data with delta-rs, executes
+              read-only SQL with DataFusion, and returns Databricks-compatible result sets.
+            </p>
+          </div>
+          <div class="flow-panel">
+            <div class="flow-node clients">Databricks SQL client</div>
+            <div class="flow-line horizontal"></div>
+            <div class="flow-node harbor">HarborSQL server</div>
+            <div class="flow-line up"></div>
+            <div class="flow-node catalog">Unity Catalog</div>
+            <div class="flow-line down"></div>
+            <div class="flow-node delta">Delta tables on S3</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="security" class="section security-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Security model</p>
+            <h2>Authorization stays where your governance already lives.</h2>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h3>Unity Catalog remains the authority</h3>
+              <p>
+                HarborSQL forwards the caller bearer token to Unity Catalog and asks for
+                temporary table credentials only for tables the caller can access.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>No persistent token storage</h3>
+              <p>
+                Databricks bearer tokens and temporary cloud credentials are not persisted.
+                Cached table providers are keyed by a process-local HMAC of the caller token.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Read-only by design</h3>
+              <p>
+                The current server targets read-only SELECT workloads, result limits, session
+                limits, operation TTLs, and request body limits.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Private by default</h3>
+              <p>
+                The local server binds to 127.0.0.1 by default. Upstream Databricks hosts use
+                HTTPS unless explicitly overridden for local test doubles.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="code" class="section code-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Client compatibility</p>
+            <h2>From warehouse endpoint to local HarborSQL endpoint.</h2>
+            <p>
+              Existing Python clients keep the Databricks SQL connector. For local HTTP
+              development, point the connector at HarborSQL and disable Cloud Fetch.
+            </p>
+          </div>
+
+          <div class="code-grid">
+            <article class="code-card">
+              <div class="code-title">
+                <span>Before</span>
+                <strong>Connect directly to a SQL warehouse</strong>
+              </div>
+              <pre><code>from databricks import sql
+import os
+
+connection = sql.connect(
+    server_hostname="&lt;workspace-host&gt;",
+    http_path="/sql/1.0/warehouses/abc123",
+    access_token=os.environ["DATABRICKS_TOKEN"],
+    catalog="workspace",
+    schema="analytics",
+)
+
+with connection.cursor() as cursor:
+    cursor.execute("SELECT count(*) FROM events")
+    print(cursor.fetchone())</code></pre>
+            </article>
+
+            <article class="code-card">
+              <div class="code-title">
+                <span>After</span>
+                <strong>Start HarborSQL and adapt the client</strong>
+              </div>
+              <pre><code>export HARBORSQL_DATABRICKS_HOST="https://&lt;workspace-host&gt;"
+export HARBORSQL_DEFAULT_CATALOG="workspace"
+export HARBORSQL_DEFAULT_SCHEMA="analytics"
+export HARBORSQL_AWS_REGION="us-west-2"
+
+harborsql server</code></pre>
+<pre><code>from databricks import sql
+import os
+
+uri = (
+    "http://127.0.0.1:1992"
+    "/sql/1.0/warehouses/local"
+)
+
+connection = sql.connect(
+    server_hostname="http://127.0.0.1:1992",
+    http_path="/sql/1.0/warehouses/local",
+    access_token=os.environ["DATABRICKS_TOKEN"],
+    catalog="workspace",
+    schema="analytics",
+    _connection_uri=uri,
+    use_cloud_fetch=False,
+)</code></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section local-section">
+        <div class="container split">
+          <div class="section-copy">
+            <p class="eyebrow">Local server</p>
+            <h2>Run it on your laptop or ship it beside your workload.</h2>
+            <p>
+              Release publishing produces a Linux x86_64 Docker image, Linux binary archive,
+              and macOS Apple Silicon archive when enabled. The same server path works for
+              local development, EC2 benchmarks, and private deployments behind TLS.
+            </p>
+            <div class="inline-actions">
+              <a class="button primary" href="https://github.com/harborsql/harborsql/releases">Releases</a>
+              <a class="button secondary" href="benchmarks.html">Benchmarks</a>
+            </div>
+          </div>
+          <div class="terminal-panel">
+            <pre><code>export TAG=v0.1.0
+docker pull ghcr.io/harborsql/harborsql:$TAG
+oras pull ghcr.io/harborsql/harborsql-binaries:$TAG
+
+./harborsql server
+# listens on 127.0.0.1:1992 by default</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section final-cta">
+        <div class="container cta-band">
+          <div>
+            <p class="eyebrow">Open source</p>
+            <h2>Bring a Databricks-compatible endpoint to Unity Catalog Delta.</h2>
+          </div>
+          <a class="button primary" href="https://github.com/harborsql/harborsql">Open the repo</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>HarborSQL</span>
+        <nav aria-label="Footer navigation">
+          <a href="https://github.com/harborsql/harborsql">GitHub</a>
+          <a href="https://docs.harborsql.com">Docs</a>
+          <a href="https://github.com/harborsql/harborsql/releases">Releases</a>
+          <a href="benchmarks.html">Benchmarks</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>

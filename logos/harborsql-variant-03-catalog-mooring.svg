@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">HarborSQL logo variant 03: Catalog Mooring</title>
+  <desc id="desc">A cove-shaped boundary with three governed table mooring points.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M76 31C69.9 23.7 60.6 19 50 19C31.8 19 17 33.8 17 52S31.8 85 50 85C60.9 85 70.6 79.7 76.6 71.5" stroke-width="8"/>
+    <path d="M42 43H64C69 43 73 47 73 52S69 61 64 61H42" stroke-width="7"/>
+  </g>
+  <g fill="currentColor">
+    <circle cx="48" cy="31" r="4"/>
+    <circle cx="60" cy="34" r="3.3"/>
+    <circle cx="69" cy="42" r="2.8"/>
+  </g>
+</svg>

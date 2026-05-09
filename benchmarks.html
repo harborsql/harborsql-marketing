@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HarborSQL Benchmarks</title>
+    <meta
+      name="description"
+      content="HarborSQL benchmark results for point lookup concurrency, cost, and ClickBench comparisons against Databricks SQL Warehouse."
+    >
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="HarborSQL home">
+        <img class="brand-mark" src="logo.svg" alt="" aria-hidden="true">
+        <span>HarborSQL</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#security">Security</a>
+        <a href="index.html#code">Code</a>
+        <a href="https://docs.harborsql.com">Docs</a>
+        <a href="benchmarks.html" aria-current="page">Benchmarks</a>
+      </nav>
+      <a class="header-cta" href="https://github.com/harborsql/harborsql">GitHub</a>
+    </header>
+
+    <main>
+      <section class="page-hero benchmarks-hero">
+        <div class="container page-hero-content">
+          <p class="eyebrow">Benchmarks</p>
+          <h1>Where HarborSQL is faster, cheaper, and where warehouses still win.</h1>
+          <p>
+            HarborSQL is strongest on concurrent point lookups and compute economics. Full
+            analytical suite benchmarks are included with the current caveats because those
+            numbers matter when choosing the right execution path.
+          </p>
+        </div>
+      </section>
+
+      <section id="point-lookups" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Point lookup concurrency</p>
+            <h2>Lower tail latency on the same Unity Catalog Delta table.</h2>
+            <p>
+              In the optimized S3-backed table run, both systems handled 800 attempted
+              requests from an EC2 i3.2xlarge benchmark client. HarborSQL ran on the same EC2
+              host over loopback, while Databricks used a 2X-Small SQL Warehouse.
+            </p>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <span>Average latency</span>
+              <strong>1.116s</strong>
+              <p>HarborSQL vs 11.356s Databricks, 90.2% lower.</p>
+            </article>
+            <article class="metric-card">
+              <span>p95 latency</span>
+              <strong>3.027s</strong>
+              <p>HarborSQL vs 30.188s Databricks, 90.0% lower.</p>
+            </article>
+            <article class="metric-card">
+              <span>p99 latency</span>
+              <strong>7.184s</strong>
+              <p>HarborSQL vs 31.462s Databricks, 77.2% lower.</p>
+            </article>
+          </div>
+
+          <div class="comparison-table-wrap">
+            <table class="comparison-table">
+              <caption>Optimized point lookup concurrency, April 26 2026</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Metric</th>
+                  <th scope="col">Databricks SQL Warehouse</th>
+                  <th scope="col">HarborSQL</th>
+                  <th scope="col">Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Wall time</th>
+                  <td>200.770s</td>
+                  <td>159.743s</td>
+                  <td>41.028s faster</td>
+                </tr>
+                <tr>
+                  <th scope="row">Avg latency</th>
+                  <td>11.356s</td>
+                  <td>1.116s</td>
+                  <td>90.2% lower</td>
+                </tr>
+                <tr>
+                  <th scope="row">p95 latency</th>
+                  <td>30.188s</td>
+                  <td>3.027s</td>
+                  <td>90.0% lower</td>
+                </tr>
+                <tr>
+                  <th scope="row">p99 latency</th>
+                  <td>31.462s</td>
+                  <td>7.184s</td>
+                  <td>77.2% lower</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="cost" class="section cost-section">
+        <div class="container split">
+          <div class="section-copy">
+            <p class="eyebrow">Cost profile</p>
+            <h2>Cheaper per run under the benchmark assumptions.</h2>
+            <p>
+              Using client wall time and a European Databricks SQL Warehouse price of
+              $0.90 per DBU, the 2X-Small warehouse costs about $0.1368 per full ClickBench
+              run. HarborSQL on i3.2xlarge on-demand EC2 costs about $0.0385 to $0.0483 per
+              European run.
+            </p>
+            <p>
+              That makes on-demand HarborSQL roughly 2.8x to 3.6x cheaper for the measured
+              run. Spot was cheaper again in the point-in-time snapshot, but interruption
+              risk belongs in the deployment decision.
+            </p>
+          </div>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <span>Databricks 2X-Small</span>
+              <div class="bar-track">
+                <div class="bar-fill databricks width-full"></div>
+              </div>
+              <strong>$0.1368</strong>
+            </div>
+            <div class="bar-row">
+              <span>HarborSQL eu-north-1</span>
+              <div class="bar-track">
+                <div class="bar-fill harbor width-28"></div>
+              </div>
+              <strong>$0.0385</strong>
+            </div>
+            <div class="bar-row">
+              <span>HarborSQL eu-west-3</span>
+              <div class="bar-track">
+                <div class="bar-fill harbor width-31"></div>
+              </div>
+              <strong>$0.0427</strong>
+            </div>
+            <div class="bar-row">
+              <span>HarborSQL Zurich</span>
+              <div class="bar-track">
+                <div class="bar-fill harbor width-35"></div>
+              </div>
+              <strong>$0.0483</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="full-suite" class="section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Full suite context</p>
+            <h2>Broad analytical batches are still a warehouse strength today.</h2>
+            <p>
+              On the 43-query ClickBench client-wall-time comparison, Databricks completed
+              the measured run faster overall. HarborSQL exposes the current bottlenecks:
+              regex/string kernels, Parquet filter pushdown behavior, and high-cardinality
+              aggregation in DataFusion.
+            </p>
+          </div>
+
+          <div class="comparison-grid">
+            <article class="result-card">
+              <h3>Full ClickBench average</h3>
+              <p class="large-number">212.519s</p>
+              <p>HarborSQL on EC2 i3.2xlarge vs 136.783s for Databricks 2X-Small.</p>
+            </article>
+            <article class="result-card">
+              <h3>HarborSQL query wins</h3>
+              <p class="large-number">4.42x</p>
+              <p>Optimized ClickBench q1 median: 0.205s HarborSQL vs 0.907s Databricks.</p>
+            </article>
+            <article class="result-card">
+              <h3>Second query win</h3>
+              <p class="large-number">3.08x</p>
+              <p>Optimized ClickBench q7 median: 0.236s HarborSQL vs 0.728s Databricks.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section benchmark-notes">
+        <div class="container notes-layout">
+          <div>
+            <p class="eyebrow">What to benchmark</p>
+            <h2>Use HarborSQL when the workload benefits from locality and simple serving.</h2>
+          </div>
+          <ul class="notes-list">
+            <li>Concurrent point lookups and service-style query traffic.</li>
+            <li>Cost-sensitive read paths where EC2 economics beat warehouse DBUs.</li>
+            <li>Local development against real Unity Catalog permissions.</li>
+            <li>Read-only Delta workloads that fit the current result type support matrix.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>HarborSQL</span>
+        <nav aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="https://github.com/harborsql/harborsql">GitHub</a>
+          <a href="https://docs.harborsql.com">Docs</a>
+          <a href="https://github.com/harborsql/harborsql/releases">Releases</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">HarborSQL logo variant 02: Dock Brackets</title>
+  <desc id="desc">Bracket-like docks around a compact query prompt.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 22H22V78H34" stroke-width="9"/>
+    <path d="M66 22H78V78H66" stroke-width="9"/>
+    <path d="M40 39L53 50L40 61" stroke-width="8"/>
+    <path d="M58 62H72" stroke-width="8"/>
+  </g>
+</svg>
