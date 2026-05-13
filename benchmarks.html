@@ -18,10 +18,6 @@
         <span>HarborSQL</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="index.html#fit">Fit</a>
-        <a href="index.html#how-it-works">How it works</a>
-        <a href="index.html#security">Security</a>
-        <a href="index.html#code">Code</a>
         <a href="https://docs.harborsql.com">Docs</a>
         <a href="benchmarks.html" aria-current="page">Benchmarks</a>
       </nav>
@@ -158,38 +154,6 @@
         </div>
       </section>
 
-      <section id="positioning" class="section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Positioning</p>
-            <h2>An in-memory SQL path for Unity Catalog Delta reads.</h2>
-            <p>
-              HarborSQL does not try to reproduce every Databricks SQL Warehouse feature. It
-              focuses on the many read-only requests that are not big-data jobs: queries that
-              fit in memory, still need Unity Catalog authorization, and should not require a
-              Spark-backed warehouse to answer.
-            </p>
-          </div>
-
-          <div class="comparison-grid">
-            <article class="result-card">
-              <h3>Offload small reads</h3>
-              <p class="large-number">Small</p>
-              <p>Route memory-sized SELECT workloads to HarborSQL instead of Spark compute.</p>
-            </article>
-            <article class="result-card">
-              <h3>Keep governance</h3>
-              <p class="large-number">UC</p>
-              <p>Keep Unity Catalog as the authority for Delta table access and credentials.</p>
-            </article>
-            <article class="result-card">
-              <h3>Keep Spark where it belongs</h3>
-              <p class="large-number">Spark</p>
-              <p>Use Databricks compute for large distributed jobs, writes, and unsupported SQL.</p>
-            </article>
-          </div>
-        </div>
-      </section>
 
       <section class="section benchmark-notes">
         <div class="container notes-layout">

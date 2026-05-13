@@ -868,6 +868,10 @@ pre {
     font-size: 0.88rem;
   }
 
+  .site-nav {
+    display: none;
+  }
+
   .header-cta {
     min-width: 86px;
   }
