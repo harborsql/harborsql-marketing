@@ -436,6 +436,10 @@ h1 {
   gap: 18px;
 }
 
+.code-grid-single {
+  grid-template-columns: minmax(0, 760px);
+}
+
 .code-card {
   overflow: hidden;
   background: #101816;

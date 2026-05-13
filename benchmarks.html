@@ -6,7 +6,7 @@
     <title>HarborSQL Benchmarks</title>
     <meta
       name="description"
-      content="HarborSQL ClickBench benchmark results against a Databricks SQL Warehouse, including runtime, compute cost, and positioning caveats."
+      content="HarborSQL ClickBench benchmark results against a Databricks SQL Warehouse, showing the economics of offloading small Unity Catalog Delta queries from Spark."
     >
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
@@ -36,7 +36,9 @@
           <p>
             The latest HarborSQL v0.1.2 ClickBench run used the Docker image on an EC2
             i3.2xlarge instance against the optimized table. The Databricks baseline used a
-            2X-Small SQL Warehouse against the same benchmark shape.
+            2X-Small SQL Warehouse against the same benchmark shape. The point is not that
+            every data-platform workload should leave Spark; it is that many SQL requests fit
+            in memory and should not pay for distributed compute.
           </p>
         </div>
       </section>
@@ -116,7 +118,7 @@
         <div class="container split">
           <div class="section-copy">
             <p class="eyebrow">Cost profile</p>
-            <h2>Up to 8x lower compute cost on this dataset.</h2>
+            <h2>Up to 8x lower compute cost when Spark is more than the query needs.</h2>
             <p>
               Using client wall time, the benchmark Databricks rate is $3.60/hour
               for a 2X-Small SQL Warehouse. The HarborSQL dashboard assumption is $0.724/hour
@@ -160,30 +162,30 @@
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">Positioning</p>
-            <h2>An endpoint alternative for supported read workloads.</h2>
+            <h2>An in-memory SQL path for Unity Catalog Delta reads.</h2>
             <p>
               HarborSQL does not try to reproduce every Databricks SQL Warehouse feature. It
-              focuses on supported read-only workloads that can keep Unity Catalog
-              authorization, keep the Databricks SQL client shape, and move execution to
-              open-source compute with materially lower runtime and cost on this benchmark.
+              focuses on the many read-only requests that are not big-data jobs: queries that
+              fit in memory, still need Unity Catalog authorization, and should not require a
+              Spark-backed warehouse to answer.
             </p>
           </div>
 
           <div class="comparison-grid">
             <article class="result-card">
-              <h3>Databricks-compatible endpoint</h3>
-              <p class="large-number">Endpoint</p>
-              <p>Databricks-compatible SQL endpoint for supported Unity Catalog Delta reads.</p>
+              <h3>Offload small reads</h3>
+              <p class="large-number">Small</p>
+              <p>Route memory-sized SELECT workloads to HarborSQL instead of Spark compute.</p>
             </article>
             <article class="result-card">
-              <h3>Clear feature boundary</h3>
-              <p class="large-number">Scope</p>
-              <p>Full SQL Warehouse feature parity, writes, BI parity, and admin SQL are outside this positioning.</p>
+              <h3>Keep governance</h3>
+              <p class="large-number">UC</p>
+              <p>Keep Unity Catalog as the authority for Delta table access and credentials.</p>
             </article>
             <article class="result-card">
-              <h3>Small migration path</h3>
-              <p class="large-number">URL</p>
-              <p>For HTTPS deployments, the application change is usually the server hostname.</p>
+              <h3>Keep Spark where it belongs</h3>
+              <p class="large-number">Spark</p>
+              <p>Use Databricks compute for large distributed jobs, writes, and unsupported SQL.</p>
             </article>
           </div>
         </div>
