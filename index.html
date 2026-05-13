@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HarborSQL - Databricks-compatible SQL for Unity Catalog Delta</title>
+    <title>HarborSQL - Open-source Databricks-compatible SQL for Unity Catalog Delta</title>
     <meta
       name="description"
-      content="HarborSQL is an external SQL server for Unity Catalog Delta tables with Databricks SQL client compatibility, local execution, and security anchored in Unity Catalog."
+      content="HarborSQL is an open-source Databricks-compatible SQL endpoint for supported read-only Unity Catalog Delta workloads, with authorization anchored in Unity Catalog."
     >
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
@@ -18,6 +18,7 @@
         <span>HarborSQL</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#fit">Fit</a>
         <a href="#how-it-works">How it works</a>
         <a href="#security">Security</a>
         <a href="#code">Code</a>
@@ -32,11 +33,12 @@
         <canvas id="harbor-flow" class="hero-canvas" aria-hidden="true"></canvas>
         <div class="hero-overlay" aria-hidden="true"></div>
         <div class="container hero-content">
-          <p class="eyebrow">External SQL engine for Unity Catalog Delta</p>
+          <p class="eyebrow">Open-source SQL endpoint for Unity Catalog Delta</p>
           <h1 id="hero-title">HarborSQL</h1>
           <p class="hero-lede">
-            Run a Databricks-compatible SQL endpoint next to your data, keep authorization in
-            Unity Catalog, and query Delta tables by just changing the warehouse URL in your code.
+            Run a Databricks-compatible SQL endpoint next to your data, keep authorization
+            in Unity Catalog, and query supported Delta workloads by changing the warehouse
+            URL in your code.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="https://github.com/harborsql/harborsql">View on GitHub</a>
@@ -44,16 +46,16 @@
           </div>
           <dl class="hero-metrics">
             <div>
-              <dt>Protocol</dt>
-              <dd>Databricks SQL clients</dd>
+              <dt>Compatibility</dt>
+              <dd>Databricks SQL connector</dd>
             </div>
             <div>
-              <dt>Catalog</dt>
-              <dd>Unity Catalog Delta</dd>
+              <dt>Governance</dt>
+              <dd>Unity Catalog authorization</dd>
             </div>
             <div>
-              <dt>Default port</dt>
-              <dd>127.0.0.1:1992</dd>
+              <dt>Latest ClickBench</dt>
+              <dd>121.6s vs 170.3s</dd>
             </div>
           </dl>
         </div>
@@ -61,18 +63,62 @@
 
       <section class="proof-strip" aria-label="Benchmark summary">
         <div class="container proof-grid">
-          <a class="proof-item" href="benchmarks.html#point-lookups">
-            <span>Optimized point lookup p95</span>
-            <strong>90.0% lower latency</strong>
+          <a class="proof-item" href="benchmarks.html#clickbench">
+            <span>43-query ClickBench run</span>
+            <strong>121.6s HarborSQL</strong>
           </a>
           <a class="proof-item" href="benchmarks.html#cost">
-            <span>European on-demand economics</span>
-            <strong>2.8x to 3.6x cheaper</strong>
+            <span>Compute economics</span>
+            <strong>up to 8x lower cost</strong>
           </a>
-          <a class="proof-item" href="benchmarks.html#full-suite">
-            <span>Full ClickBench suite</span>
-            <strong>Honest baseline included</strong>
+          <a class="proof-item" href="benchmarks.html#positioning">
+            <span>Positioning</span>
+            <strong>Endpoint alternative, not a clone</strong>
           </a>
+        </div>
+      </section>
+
+      <section id="fit" class="section security-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Where it fits</p>
+            <h2>A targeted endpoint alternative for supported read-only workloads.</h2>
+            <p>
+              HarborSQL is strongest when an application already speaks the Databricks SQL
+              connector protocol, the data is in Unity Catalog Delta, and a full SQL Warehouse
+              is more infrastructure than the workload needs.
+            </p>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h3>Change the endpoint URL</h3>
+              <p>
+                Keep the Databricks SQL connector in your app and route supported queries to
+                HarborSQL instead of a warehouse endpoint.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Keep Unity Catalog in charge</h3>
+              <p>
+                HarborSQL checks access through Unity Catalog and uses short-lived table
+                credentials for the caller.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Serve reads near the data</h3>
+              <p>
+                Run the open-source server on your own compute, colocated with the data and
+                scaled for the serving path you actually need.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Benchmark before switching</h3>
+              <p>
+                It is not a full warehouse clone. Start with read-only SELECT workloads and
+                measure your queries against the current support matrix.
+              </p>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -80,7 +126,7 @@
         <div class="container split">
           <div class="section-copy">
             <p class="eyebrow">How it works</p>
-            <h2>Keep the client shape. Move the execution path.</h2>
+            <h2>Keep the client shape. Move execution onto your compute.</h2>
             <p>
               HarborSQL accepts Databricks SQL connector-style requests, resolves Unity
               Catalog Delta tables as the caller, opens the data with delta-rs, executes
@@ -99,7 +145,7 @@
         </div>
       </section>
 
-      <section id="security" class="section security-section">
+      <section id="security" class="section">
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">Security model</p>
@@ -142,10 +188,11 @@
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">Client compatibility</p>
-            <h2>From warehouse endpoint to local HarborSQL endpoint.</h2>
+            <h2>From warehouse endpoint to HarborSQL endpoint.</h2>
             <p>
-              Existing Python clients keep the Databricks SQL connector. For local HTTP
-              development, point the connector at HarborSQL and disable Cloud Fetch.
+              Existing Python clients keep the Databricks SQL connector. When HarborSQL is
+              behind HTTPS, the common migration path is changing the server hostname to the
+              HarborSQL endpoint.
             </p>
           </div>
 
@@ -174,30 +221,20 @@ with connection.cursor() as cursor:
             <article class="code-card">
               <div class="code-title">
                 <span>After</span>
-                <strong>Start HarborSQL and adapt the client</strong>
+                <strong>Run HarborSQL behind HTTPS and change the host</strong>
               </div>
               <pre><code>export HARBORSQL_DATABRICKS_HOST="https://&lt;workspace-host&gt;"
-export HARBORSQL_DEFAULT_CATALOG="workspace"
-export HARBORSQL_DEFAULT_SCHEMA="analytics"
-export HARBORSQL_AWS_REGION="us-west-2"
 
 harborsql server</code></pre>
 <pre><code>from databricks import sql
 import os
 
-uri = (
-    "http://127.0.0.1:1992"
-    "/sql/1.0/warehouses/local"
-)
-
 connection = sql.connect(
-    server_hostname="http://127.0.0.1:1992",
+    server_hostname="sql.harborsql.internal",
     http_path="/sql/1.0/warehouses/local",
     access_token=os.environ["DATABRICKS_TOKEN"],
     catalog="workspace",
     schema="analytics",
-    _connection_uri=uri,
-    use_cloud_fetch=False,
 )</code></pre>
             </article>
           </div>
@@ -220,12 +257,14 @@ connection = sql.connect(
             </div>
           </div>
           <div class="terminal-panel">
-            <pre><code>export TAG=v0.1.0
-docker pull ghcr.io/harborsql/harborsql:$TAG
-oras pull ghcr.io/harborsql/harborsql-binaries:$TAG
+            <pre><code>export TAG=v0.1.2
+export HARBORSQL_DATABRICKS_HOST="https://&lt;workspace-host&gt;"
 
-./harborsql server
-# listens on 127.0.0.1:1992 by default</code></pre>
+docker run --rm \
+  -p 127.0.0.1:1992:1992 \
+  -e HARBORSQL_BIND_ADDR="0.0.0.0:1992" \
+  -e HARBORSQL_DATABRICKS_HOST \
+  ghcr.io/harborsql/harborsql:$TAG</code></pre>
           </div>
         </div>
       </section>
@@ -234,7 +273,7 @@ oras pull ghcr.io/harborsql/harborsql-binaries:$TAG
         <div class="container cta-band">
           <div>
             <p class="eyebrow">Open source</p>
-            <h2>Bring a Databricks-compatible endpoint to Unity Catalog Delta.</h2>
+            <h2>Run a Databricks-compatible endpoint for Unity Catalog Delta.</h2>
           </div>
           <a class="button primary" href="https://github.com/harborsql/harborsql">Open the repo</a>
         </div>

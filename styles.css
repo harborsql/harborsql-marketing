@@ -674,6 +674,14 @@ pre {
   width: 100%;
 }
 
+.width-12 {
+  width: 12%;
+}
+
+.width-14 {
+  width: 14%;
+}
+
 .width-28 {
   width: 28%;
 }
@@ -718,14 +726,19 @@ pre {
 
 .notes-list li {
   min-height: 56px;
-  display: flex;
-  align-items: center;
+  display: block;
   padding: 14px 16px;
   border-left: 4px solid var(--teal);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.74);
   color: #30413b;
   font-weight: 700;
+}
+
+.notes-list a {
+  color: var(--teal-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .final-cta {

@@ -22,6 +22,8 @@ the six design variants, primary wordmark, and 1024px PNG export.
 The benchmark numbers are drawn from sibling repository docs and artifacts:
 
 - `../harborsql/README.md`
+- `../harborsql-bench/results/harborsql/i3.2xlarge/v0.1.2/manifest.json`
+- `../harborsql-bench/results/harborsql/i3.2xlarge/v0.1.2/clickbench/optimized.json`
+- `../harborsql-bench/results/databricks-sql-warehouse/2xs/v2026.10/clickbench/databricks-2xs-aws-ec2-t3.small-clickbench-20260510T152626Z.json`
+- `../harborsql-bench/docs/benchmark-instance-costs.md`
 - `../harborsql-bench/docs/benchmark-cost-analysis.md`
-- `../harborsql-bench/datasets/clickbench-hits/results/concurrency/s3-point-lookup-ec2-client-optimized-20260426-summary.md`
-- `../harborsql-bench/datasets/clickbench-hits/results/performance/clickbench-classic-optimized-ec2-client-20260426-summary.md`
