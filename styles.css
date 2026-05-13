@@ -222,15 +222,6 @@ h1 {
   border-color: var(--teal);
 }
 
-.hero-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  max-width: 760px;
-  margin: 42px 0 0;
-}
-
-.hero-metrics div,
 .proof-item,
 .feature-card,
 .code-card,
@@ -244,27 +235,6 @@ h1 {
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.82);
   box-shadow: var(--shadow);
-}
-
-.hero-metrics div {
-  min-height: 94px;
-  padding: 18px;
-}
-
-.hero-metrics dt,
-.hero-metrics dd {
-  margin: 0;
-}
-
-.hero-metrics dt {
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.hero-metrics dd {
-  margin-top: 8px;
-  font-weight: 800;
 }
 
 .proof-strip {
@@ -874,25 +844,6 @@ pre {
   .section-heading p:not(.eyebrow),
   .page-hero p {
     font-size: 1rem;
-  }
-
-  .hero-metrics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    margin-top: 24px;
-  }
-
-  .hero-metrics div {
-    min-height: 78px;
-    padding: 10px;
-  }
-
-  .hero-metrics dt {
-    font-size: 0.7rem;
-  }
-
-  .hero-metrics dd {
-    font-size: 0.82rem;
   }
 
   .section {
