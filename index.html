@@ -1,254 +1,388 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HarborSQL - Open-source Databricks-compatible SQL for Unity Catalog Delta</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HarborSQL | Open-source SQL compute for Unity Catalog</title>
     <meta
       name="description"
-      content="HarborSQL is an open-source in-memory SQL engine for supported Unity Catalog Delta workloads, built to offload small Databricks SQL requests without paying a Spark premium."
-    >
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css">
+      content="Keep Unity Catalog and run your own SQL compute. HarborSQL is an open-source, self-hosted engine for supported queries over your existing Delta tables."
+    />
+    <link rel="canonical" href="https://harborsql.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://harborsql.com/" />
+    <meta property="og:title" content="HarborSQL | Own your SQL compute" />
+    <meta property="og:description" content="Keep Unity Catalog. Run supported SQL on infrastructure you control with HarborSQL, an open-source engine for existing Delta tables." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#102c32" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="landing.css" />
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="index.html" aria-label="HarborSQL home">
-        <img class="brand-mark" src="logo.svg" alt="" aria-hidden="true">
-        <span>HarborSQL</span>
-      </a>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#how-it-works">Product</a>
-        <a href="#fit">Use Case</a>
-        <a href="https://docs.harborsql.com">Docs</a>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="header wrap">
+      <a class="brand" href="/" aria-label="HarborSQL home"
+        ><img src="logo.svg" alt="" width="32" height="32" />HarborSQL<span
+          class="oss"
+          >OPEN SOURCE</span
+        ></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#architecture">How it works</a
+        ><a href="#compatibility">Compatibility</a
+        ><a href="https://docs.harborsql.com/benchmarks">Benchmarks</a
+        ><a href="https://docs.harborsql.com">Docs ↗</a>
       </nav>
-      <a class="header-cta" href="https://github.com/harborsql/harborsql">GitHub</a>
+      <a class="nav-button" href="https://github.com/harborsql/harborsql"
+        >GitHub ↗</a
+      >
     </header>
-
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <canvas id="harbor-flow" class="hero-canvas" aria-hidden="true"></canvas>
-        <div class="hero-overlay" aria-hidden="true"></div>
-        <div class="container hero-content">
-          <p class="eyebrow">Open-source SQL endpoint for Unity Catalog Delta</p>
-          <h1 id="hero-title">HarborSQL</h1>
-          <p class="hero-lede">
-            Most data-platform requests are not big-data jobs. Run an in-memory SQL endpoint
-            for supported Unity Catalog Delta reads, offload the many small queries that fit
-            on a single server, and stop paying a Spark premium for them.
+    <main id="main">
+      <section class="hero wrap">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="dot"></span> YOUR DATA PLATFORM. ANOTHER COMPUTE
+            OPTION.
           </p>
-          <div class="hero-actions">
-            <a class="button primary" href="https://github.com/harborsql/harborsql">View on GitHub</a>
-            <a class="button secondary" href="https://docs.harborsql.com/getting-started">Read the docs</a>
+          <h1>
+            Keep Unity Catalog.<br /><span>Own your<br />SQL compute.</span>
+          </h1>
+          <p class="lede">
+            An open-source SQL engine for your existing Delta tables. Keep your
+            Databricks identity. Run supported queries on infrastructure you
+            control.
+          </p>
+          <div class="actions">
+            <a
+              class="button primary"
+              href="https://docs.harborsql.com/getting-started"
+              >Get started <span>→</span></a
+            ><a
+              class="button secondary"
+              href="https://github.com/harborsql/harborsql"
+              >View on GitHub ↗</a
+            >
           </div>
+          <p class="hero-note">Self-hosted. MIT licensed. No data migration.</p>
         </div>
-      </section>
-
-      <section class="proof-strip" aria-label="Benchmark summary">
-        <div class="container proof-grid">
-          <a class="proof-item" href="benchmarks.html#clickbench">
-            <span>Proof tested on clickbench</span>
-            <strong>121.6s client wall time</strong>
-          </a>
-          <a class="proof-item" href="benchmarks.html#cost">
-            <span>Less Spark-shaped spend</span>
-            <strong>up to 8x lower cost</strong>
-          </a>
-          <a class="proof-item" href="benchmarks.html#positioning">
-            <span>Operating model</span>
-            <strong>Keep Spark for big jobs</strong>
-          </a>
-        </div>
-      </section>
-
-      <section id="fit" class="section security-section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Where it fits</p>
-            <h2>Offload the requests that never needed Spark.</h2>
-            <p>
-              Data platforms still need Spark for large scans, joins, ETL, and distributed
-              compute. But a large share of application, API, notebook, and operational SQL is
-              small enough to execute in memory on one server. HarborSQL gives those reads a
-              cheaper path while keeping Unity Catalog as the control plane.
-            </p>
+        <div
+          class="hero-art"
+          aria-label="SQL clients connect to HarborSQL. HarborSQL requests access from Unity Catalog and reads Delta tables on S3."
+        >
+          <div class="art-top">
+            <span>YOUR STACK, CONNECTED</span
+            ><span class="art-index">01 / 03</span>
           </div>
-          <div class="feature-grid">
-            <article class="feature-card">
-              <h3>Keep Unity Catalog in charge</h3>
-              <p>
-                HarborSQL checks access through Unity Catalog and uses short-lived table
-                credentials for the caller.
-              </p>
-            </article>
-            <article class="feature-card">
-              <h3>Use an in-memory SQL engine</h3>
-              <p>
-                HarborSQL opens Unity Catalog-managed Delta tables with delta-rs and executes
-                supported SELECT queries with DataFusion on your own compute.
-              </p>
-            </article>
-            <article class="feature-card">
-              <h3>One line change in the code</h3>
-              <p>
-                Keep your code using the Databricks SQL connector and route supported queries
-                to HarborSQL instead of a Databricks endpoint.
-              </p>
-            </article>
-            <article class="feature-card">
-              <h3>Keep Spark for big jobs</h3>
-              <p>
-                HarborSQL is not a full warehouse clone. Use it for read-only queries that fit
-                the current support matrix, and leave distributed work on Spark.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="how-it-works" class="section">
-        <div class="container split">
-          <div class="section-copy">
-            <p class="eyebrow">How it works</p>
-            <h2>Keep the client shape. Move small-query execution onto your compute.</h2>
-            <p>
-              HarborSQL accepts Databricks SQL connector-style requests, resolves Unity
-              Catalog Delta tables as the caller, opens the data with delta-rs, executes
-              read-only SQL in memory with DataFusion, and returns Databricks-compatible
-              result sets.
-            </p>
-          </div>
-          <div class="flow-panel">
-            <div class="flow-node clients">Databricks SQL client</div>
-            <div class="flow-line horizontal"></div>
-            <div class="flow-node harbor">HarborSQL server</div>
-            <div class="flow-line up"></div>
-            <div class="flow-node catalog">Unity Catalog</div>
-            <div class="flow-line down"></div>
-            <div class="flow-node delta">Delta tables on S3</div>
-          </div>
-        </div>
-      </section>
-
-      <section id="security" class="section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Security model</p>
-            <h2>Authorization stays where your governance already lives.</h2>
-          </div>
-          <div class="feature-grid">
-            <article class="feature-card">
-              <h3>Unity Catalog remains the authority</h3>
-              <p>
-                HarborSQL forwards the caller bearer token to Unity Catalog and asks for
-                temporary table credentials only for tables the caller can access.
-              </p>
-            </article>
-            <article class="feature-card">
-              <h3>No persistent token storage</h3>
-              <p>
-                Databricks bearer tokens and temporary cloud credentials are not persisted.
-                Cached table providers are keyed by a process-local HMAC of the caller token.
-              </p>
-            </article>
-            <article class="feature-card">
-              <h3>Read-only by design</h3>
-              <p>
-                The current server targets read-only SELECT workloads, result limits, session
-                limits, operation TTLs, and request body limits.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="code" class="section code-section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">Client compatibility</p>
-            <h2>From warehouse endpoint to HarborSQL endpoint.</h2>
-            <p>
-              Existing Python clients keep the Databricks SQL connector. Put HarborSQL behind
-              HTTPS, change the server hostname, and send the small read path to the
-              in-memory engine.
-            </p>
-          </div>
-
-          <div class="code-grid code-grid-single">
-
-            <article class="code-card">
-              <div class="code-title">
-                <strong>One line change</strong>
-              </div>
-<pre><code>from databricks import sql
-import os
-
-SERVER_HOSTNAME="sql.harborsql.com"
-
-connection = sql.connect(
-    server_hostname=SERVER_HOSTNAME,
-    http_path="/sql/1.0/warehouses/local",
-    access_token=os.environ["DATABRICKS_TOKEN"],
-    catalog="workspace",
-    schema="analytics",
-)</code></pre>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section local-section">
-        <div class="container split">
-          <div class="section-copy">
-            <p class="eyebrow">Local server</p>
-            <h2>Run it beside the services generating the small queries.</h2>
-            <p>
-              Release publishing produces a Linux x86_64 Docker image, Linux binary archive,
-              and macOS Apple Silicon archive when enabled. The same server path works for
-              local development, EC2 benchmarks, and private deployments behind TLS where the
-              goal is to serve memory-sized reads without starting Spark compute.
-            </p>
-            <div class="inline-actions">
-              <a class="button primary" href="https://github.com/harborsql/harborsql/releases">Releases</a>
-              <a class="button secondary" href="benchmarks.html">Benchmarks</a>
+          <div class="client-node">
+            <span class="node-icon">&gt;_</span>
+            <div>
+              <strong>Your SQL clients</strong
+              ><small>Python connector · JDBC</small>
             </div>
           </div>
-          <div class="terminal-panel">
-            <pre><code>export TAG=v0.1.2
-export HARBORSQL_DATABRICKS_HOST="https://&lt;workspace-host&gt;"
+          <div class="connector"><span>SQL over HTTP</span></div>
+          <div class="engine-node">
+            <img src="logo.svg" alt="" width="44" height="44" />
+            <div>
+              <strong>HarborSQL</strong><small>SQL compute you control</small>
+            </div>
+            <span class="engine-dot"></span>
+          </div>
+          <div class="branches">
+            <div>
+              <span class="branch-label">Identity &amp; table access</span>
+              <div class="storage-node">
+                <span>▤</span><strong>Unity Catalog</strong
+                ><small>Your existing catalog</small>
+              </div>
+            </div>
+            <div>
+              <span class="branch-label">Direct data reads</span>
+              <div class="storage-node">
+                <span>△</span><strong>Delta Lake</strong
+                ><small>Your tables on S3</small>
+              </div>
+            </div>
+          </div>
+          <div class="art-footer">
+            <span class="dot"></span> SAME DATA. DIFFERENT EXECUTION ENGINE.
+          </div>
+        </div>
+      </section>
+      <div class="foundation">
+        <div class="wrap foundation-inner">
+          <span>BUILT ON OPEN FOUNDATIONS</span
+          ><strong>Apache DataFusion</strong><span class="plus">+</span
+          ><strong>Delta Lake</strong><span class="plus">+</span
+          ><strong>Unity Catalog access</strong>
+        </div>
+      </div>
+      <section id="architecture" class="section wrap">
+        <div class="section-heading">
+          <p class="eyebrow">01 / KEEP WHAT WORKS</p>
+          <h2>Change the compute.<br />Not your entire platform.</h2>
+          <p>
+            Your tables and catalog already exist. HarborSQL gives you another
+            place to execute supported SQL, alongside your Databricks SQL
+            Warehouse.
+          </p>
+        </div>
+        <div class="three-columns benefits">
+          <article>
+            <span class="number">01</span>
+            <h3>Your data stays put.</h3>
+            <p>
+              Read existing S3-backed Delta tables directly. No export pipeline
+              or second copy to maintain for your evaluation.
+            </p>
+          </article>
+          <article>
+            <span class="number">02</span>
+            <h3>Your identity comes with you.</h3>
+            <p>
+              HarborSQL uses the caller’s Databricks token to request table
+              access and temporary credentials from Unity Catalog.
+            </p>
+          </article>
+          <article>
+            <span class="number">03</span>
+            <h3>Your compute is your choice.</h3>
+            <p>
+              Run a self-hosted DataFusion engine. Choose the infrastructure and
+              move only the workloads that pass your checks.
+            </p>
+          </article>
+        </div>
+        <a class="text-link" href="https://docs.harborsql.com/how-it-works"
+          >Explore the architecture →</a
+        >
+      </section>
+      <section class="workload-section">
+        <div class="wrap section">
+          <div class="section-heading">
+            <p class="eyebrow">02 / FIND YOUR FIRST WORKLOAD</p>
+            <h2>Start small. Prove the fit.</h2>
+            <p>
+              Evaluate one query before moving a workload. Keep your existing
+              warehouse available for everything else.
+            </p>
+          </div>
+          <div class="three-columns workloads">
+            <article>
+              <span class="badge">AVAILABLE · READ-ONLY</span>
+              <h3>Application queries</h3>
+              <p>
+                Try supported SELECT queries from your Python or JDBC
+                application against the same Delta tables.
+              </p>
+              <a
+                class="text-link"
+                href="https://docs.harborsql.com/getting-started"
+                >Connect a client →</a
+              >
+            </article>
+            <article>
+              <span class="badge">AVAILABLE · READ-ONLY</span>
+              <h3>Internal analytics</h3>
+              <p>
+                Compare query results and column metadata with SQL Warehouse
+                before switching an internal workload.
+              </p>
+              <a
+                class="text-link"
+                href="https://docs.harborsql.com/migrate-databricks-sql-warehouse"
+                >Run the comparison →</a
+              >
+            </article>
+            <article class="roadmap">
+              <span class="badge pending">IN DEVELOPMENT</span>
+              <h3>Your existing dbt projects</h3>
+              <p>
+                Write-query support is underway, targeting dbt-databricks
+                without model or adapter changes. Compatibility is not yet
+                verified.
+              </p>
+              <a class="text-link" href="https://github.com/harborsql/harborsql"
+                >Follow development ↗</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+      <section id="compatibility" class="section wrap evidence">
+        <div class="section-heading">
+          <p class="eyebrow">03 / EVIDENCE BEFORE PROMISES</p>
+          <h2>Don’t take our word for it.<br />Run your own comparison.</h2>
+          <p>
+            Open code, reproducible checks, and explicit boundaries. HarborSQL
+            is pre-1.0 software, not a complete Databricks replacement.
+          </p>
+          <a
+            class="button secondary"
+            href="https://docs.harborsql.com/databricks-sql-warehouse-alternative"
+            >See where HarborSQL fits →</a
+          >
+        </div>
+        <div class="evidence-list">
+          <a
+            href="https://docs.harborsql.com/migrate-databricks-sql-warehouse"
+            ><span class="evidence-label"
+              >TRY IT ON YOUR DATA</span
+            >
+            <h3>Compare with your SQL Warehouse. ↗</h3>
+            <p>
+              Run the same query through both engines on an existing Delta
+              table. Compare the results before moving a workload.
+            </p></a
+          ><a href="https://docs.harborsql.com/databricks-jdbc"
+            ><span class="evidence-label">COMPATIBILITY</span>
+            <h3>Tested clients. Documented limits. ↗</h3>
+            <p>
+              Check driver versions, authentication, and required settings
+              before evaluating your application.
+            </p></a
+          ><a href="https://docs.harborsql.com/benchmarks"
+            ><span class="evidence-label">REPRODUCIBLE BENCHMARKS</span>
+            <h3>Inspect the workload behind the numbers. ↗</h3>
+            <p>
+              Review hardware, methodology, datasets, and limitations. Measure
+              your workload on your infrastructure.
+            </p></a
+          >
+        </div>
+      </section>
+      <section class="quickstart">
+        <div class="wrap section quickstart-grid">
+          <div>
+            <p class="eyebrow">FROM READING TO RUNNING</p>
+            <h2>Bring a table.<br />Try a query.</h2>
+            <p>
+              Start a local engine, connect your client, and compare a read
+              against your existing SQL Warehouse.
+            </p>
+            <p class="prerequisites">
+              You’ll need a Databricks workspace, an S3-backed Delta table,
+              external data access enabled, and the required Unity Catalog
+              grants. Replace the image tag and workspace host below.
+            </p>
+            <a
+              class="text-link"
+              href="https://docs.harborsql.com/getting-started"
+              >Full setup and prerequisites →</a
+            >
+          </div>
+          <div class="terminal">
+            <div class="terminal-bar">
+              <span><i></i><i></i><i></i></span
+              ><span>terminal / local evaluation</span
+              ><button id="copy" type="button" hidden>Copy</button>
+            </div>
+            <pre
+              tabindex="0"
+              aria-label="Docker command"
+            ><code id="command">export TAG="&lt;version&gt;"
 
 docker run --rm \
   -p 127.0.0.1:1992:1992 \
   -e HARBORSQL_BIND_ADDR="0.0.0.0:1992" \
-  -e HARBORSQL_DATABRICKS_HOST \
+  -e HARBORSQL_DATABRICKS_HOST="https://&lt;workspace-host&gt;" \
   ghcr.io/harborsql/harborsql:$TAG</code></pre>
+            <div class="terminal-note">
+              Local endpoint only. Use HTTPS for production.
+            </div>
+            <span id="copy-status" class="sr-only" role="status"></span>
           </div>
         </div>
       </section>
-
-      <section class="section final-cta">
-        <div class="container cta-band">
-          <div>
-            <p class="eyebrow">Open source</p>
-            <h2>Offload small Unity Catalog Delta queries from Spark.</h2>
-          </div>
-          <a class="button primary" href="https://github.com/harborsql/harborsql">Open the repo</a>
+      <section class="section wrap faq">
+        <div>
+          <p class="eyebrow">A FEW IMPORTANT DETAILS</p>
+          <h2>Know the boundaries.</h2>
+        </div>
+        <div>
+          <details>
+            <summary>Does HarborSQL replace Databricks?</summary>
+            <p>
+              No. It provides alternative compute for supported SQL workloads.
+              Your Databricks workspace and Unity Catalog remain in place. It
+              does not replace the full platform or managed warehouse
+              operations.
+            </p>
+          </details>
+          <details>
+            <summary>Does my data move?</summary>
+            <p>
+              No data copy is needed for supported reads. HarborSQL reads your
+              existing Delta tables on S3 using temporary table credentials
+              requested through Unity Catalog.
+            </p>
+          </details>
+          <details>
+            <summary>Which clients and SQL features are supported?</summary>
+            <p>
+              HarborSQL supports a focused Databricks SQL connector and JDBC
+              protocol surface. It is not blanket compatibility with all SQL,
+              ODBC, or BI tools. Read the
+              <a href="https://docs.harborsql.com/sql-compatibility"
+                >SQL compatibility notes</a
+              >
+              and test your client.
+            </p>
+          </details>
+          <details>
+            <summary>Can I run dbt today?</summary>
+            <p>
+              Not as a verified supported workflow. Write support is in
+              development, targeting existing dbt-databricks projects without
+              model or adapter changes. That target is not a compatibility
+              guarantee.
+            </p>
+          </details>
+          <details>
+            <summary>Does it enforce every Unity Catalog policy?</summary>
+            <p>
+              Table access uses your Databricks identity and Unity Catalog
+              credentials. That does not establish full support for row filters,
+              column masks, views, or every governance feature. Review your
+              policy requirements before moving a workload.
+            </p>
+          </details>
+          <details>
+            <summary>What do I need to operate?</summary>
+            <p>
+              You operate the HarborSQL service and its compute, networking,
+              TLS, monitoring, and upgrades. The software is MIT licensed;
+              infrastructure and operational costs still apply.
+            </p>
+          </details>
+        </div>
+      </section>
+      <section class="closing wrap">
+        <p class="eyebrow">YOUR NEXT QUERY, YOUR COMPUTE.</p>
+        <h2>Try HarborSQL on a table<br />you already have.</h2>
+        <div class="actions">
+          <a
+            class="button primary"
+            href="https://docs.harborsql.com/getting-started"
+            >Get started →</a
+          ><a
+            class="text-link"
+            href="https://docs.harborsql.com/migrate-databricks-sql-warehouse"
+            >Read the migration guide ↗</a
+          >
         </div>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <span>HarborSQL</span>
-        <nav aria-label="Footer navigation">
-          <a href="https://github.com/harborsql/harborsql">GitHub</a>
-          <a href="https://docs.harborsql.com">Docs</a>
-          <a href="https://github.com/harborsql/harborsql/releases">Releases</a>
-          <a href="benchmarks.html">Benchmarks</a>
-        </nav>
-      </div>
+    <footer class="wrap footer">
+      <a class="brand" href="/"
+        ><img src="logo.svg" alt="" width="26" height="26" />HarborSQL</a
+      >
+      <nav aria-label="Footer navigation">
+        <a href="https://docs.harborsql.com">Docs</a
+        ><a href="https://github.com/harborsql/harborsql">GitHub</a
+        ><a href="https://github.com/harborsql/harborsql/releases">Releases</a>
+      </nav>
     </footer>
-
-    <script src="site.js"></script>
+    <script src="landing.js" defer></script>
   </body>
 </html>

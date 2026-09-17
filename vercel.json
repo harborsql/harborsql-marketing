@@ -3,6 +3,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/benchmarks",
+      "destination": "https://docs.harborsql.com/benchmarks",
+      "permanent": true
+    },
+    {
       "source": "/docs",
       "destination": "https://docs.harborsql.com",
       "permanent": true
